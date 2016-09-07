@@ -7,4 +7,4 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-Muistilista [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Muistilista

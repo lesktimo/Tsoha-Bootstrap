@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni]http://lesktimo.users.cs.helsinki.fi/tsoha)
+* [Linkki sovellukseeni](http://lesktimo.users.cs.helsinki.fi/tsoha)
 * [Linkki dokumentaatiooni](https://github.com/lesktimo/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
