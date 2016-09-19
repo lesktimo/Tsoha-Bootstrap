@@ -1,10 +1,30 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster:400,300,700);
 #main-container{
-  max-width: 1200px;
-  padding: 10px 25px;
-  margin: 0px auto;
+    max-width: 1200px;
+    padding: 10px 25px;
+    margin: 70px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-size:x-large;
+    font-family: Lobster;
+    
 }
 
 .navbar .container-fluid{
-  max-width: 1200px;
-  margin: 0px auto;
+    /*max-width: 1200px;*/
+    margin: 0px auto;
+    background-color: #428bca;
+    font-size:larger;
+    font-family: Lobster;
+}
+
+body {
+    background-color:papayawhip;
+    background-image: url("http://lesktimo.users.cs.helsinki.fi/tsoha/assets/tausta.jpg");
+}
+.page-header{
+    border-bottom: hidden;
+    margin: -3px;
+
 }
