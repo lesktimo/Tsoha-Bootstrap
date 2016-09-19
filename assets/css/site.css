@@ -22,6 +22,9 @@
 body {
     background-color:papayawhip;
     background-image: url("http://lesktimo.users.cs.helsinki.fi/tsoha/assets/tausta.jpg");
+    background-image: center fixed;
+    background-size: cover;
+    
 }
 .page-header{
     border-bottom: hidden;
