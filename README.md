@@ -15,4 +15,6 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-Muistilista
+Muistilistaa voi käyttää arkiaskareiden muistamiseen, tai vaikkapa 
+ostoslistana. Muistilistaan pystyy lisäämään, muokkamaan ja poistamaan muistettavia asioita. 
+Tiedon tulisi säilyä järkevästi jäsenneltynä tärkeysjärjestyksessä, kategorioihin luokiteltuina.
