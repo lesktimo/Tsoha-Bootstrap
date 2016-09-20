@@ -3,31 +3,57 @@
     max-width: 1200px;
     padding: 10px 25px;
     margin: 70px auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
     font-size:x-large;
     font-family: Lobster;
+    text-align: center;
     
 }
 
 .navbar .container-fluid{
-    /*max-width: 1200px;*/
     margin: 0px auto;
-    background-color: #428bca;
+    background-color: #8a6d3b;
     font-size:larger;
     font-family: Lobster;
+    background-image: url("tausta2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.navbar-header a.navbar-brand {
+    color: black;
+}
+
+#navigation a{
+    color: black;
+}
+#navigation a:hover{
+    color: whitesmoke;
 }
 
 body {
     background-color:papayawhip;
-    background-image: url("http://lesktimo.users.cs.helsinki.fi/tsoha/assets/tausta.jpg");
-    background-image: center fixed;
+    background-image: url("tausta.jpg");
+    background-repeat: repeat;
+    background-position: center;
     background-size: cover;
-    
+
 }
 .page-header{
     border-bottom: hidden;
     margin: -3px;
 
+
+
+}
+
+#log{
+    width:200px;
+
+}
+
+.btn-primary{
+    max-width: 295px;
+    
+    
 }
