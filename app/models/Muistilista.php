@@ -28,8 +28,8 @@ class Muistilista extends BaseModel {
         $rivi = $haku->fetch();
         if ($rivi) {
             $muistilista = new Muistilista(array(
-                'nimi' => $rivi['nimi'],
-                'id' => $rivi['id']
+                'kayttaja_id' => $rivi['kayttaja_id'],
+                'mp_id' => $rivi['mp_id']
             ));
             return $muistilista;
         }

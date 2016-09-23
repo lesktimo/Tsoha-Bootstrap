@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Testi muistilista</h1>
+
+<h1>Muistilista</h1>
 
 <p>
     <a href="{{base_path}}/muistiinpano/new" class="btn btn-success">Lisää muistiinpano</a>
@@ -19,9 +20,9 @@
     </thead>
 
     <tbody>
-        {% for kayttaja in kayttajat %}
+        {% for muistiinpano in muistiinpanot %}
         <tr>
-            <td><a href="{{base_path}}/muistiinpano/{{muistiinpano.id}}">{{muistiinpano.nimi}}</a></td>
+            <td><a href="{{base_path}}/muistiinpano/{{muistiinpano.id}}">{{muistiinpano.nimi}}</td>
             <td>{{muistiinpano.prioriteetti}}<strong>/5</strong></td>
             <td>{{muistiinpano.kategoria_id}}</td>
             <td>
@@ -31,9 +32,10 @@
                 <label class="label label-danger">Kesken</label>
                 {% endif %}
             </td>
-            <td>muistiinpano.lisatty</td>
+            <td>{{muistiinpano.lisatty}}</td>
             <th><a class="btn btn-default btn-sm" href="{{base_path}}/muistiinpano/{{muistiinpano.id}}/edit">Muokkaa</a></th>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

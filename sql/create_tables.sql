@@ -6,10 +6,16 @@ CREATE TABLE Kayttaja(
   admin boolean DEFAULT FALSE 
 );
 
+CREATE TABLE Kategoria(
+  nimi varchar(75) NOT NULL,
+  id SERIAL PRIMARY KEY
+);
+
 CREATE TABLE Muistiinpano(
   id SERIAL PRIMARY KEY,
   nimi varchar(75) NOT NULL,
   prioriteetti INTEGER,
+  kategoria_id INTEGER REFERENCES Kategoria(id),
   kuvaus text,
   lisatty date,
   tila boolean DEFAULT FALSE
@@ -18,11 +24,6 @@ CREATE TABLE Muistiinpano(
 CREATE TABLE Muistilista(
   kayttaja_id INTEGER REFERENCES Kayttaja(id),
   mp_id INTEGER REFERENCES Muistiinpano(id)
-);
-
-CREATE TABLE Kategoria(
-  nimi varchar(75) NOT NULL,
-  id SERIAL PRIMARY KEY
 );
 
 CREATE TABLE Kat_mp(
