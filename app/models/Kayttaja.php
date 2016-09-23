@@ -2,20 +2,48 @@
 
 class Kayttaja extends BaseModel {
 
-    public $id, $kayttajanimi, $salasana;
+    public $id, $kayttajatunnus, $salasana;
 
-    public function __construct($id, $kayttajanimi, $salasana) {
-        $this->id = $id;
-        $this->kayttajanimi = $kayttajanimi;
-        $this->salasana = $salasana;
+    public function __construct($attributes) {
+        parent::__construct($attributes);
     }
-    
+
+    public static function all() {
+        $haku = DB::connection()->prepare('SELECT * FROM Kayttaja');
+        $haku->execute();
+        $rivit = $haku->fetchAll();
+        $kayttajat = array();
+        foreach ($rivit as $rivi) {
+            $kayttajat = new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana']
+            ));
+        }
+        return $kayttajat;
+    }
+
+    public static function find($id) {
+        $haku = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
+        $haku->execute(array('id' => $id));
+        $rivi = $haku->fetch();
+        if ($rivi) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana']
+            ));
+            return $kayttaja;
+        }
+        return null;
+    }
+
     function getId() {
         return $this->id;
     }
 
-    function getKayttajanimi() {
-        return $this->kayttajanimi;
+    function getKayttajatunnus() {
+        return $this->kayttajatunnus;
     }
 
     function getSalasana() {
