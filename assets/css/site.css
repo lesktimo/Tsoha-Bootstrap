@@ -6,7 +6,7 @@
     font-size:x-large;
     font-family: Lobster;
     text-align: center;
-    
+
 }
 
 .navbar .container-fluid{
@@ -54,6 +54,14 @@ body {
 
 .btn-primary{
     max-width: 295px;
-    
-    
+
+
+}
+
+#poyta{
+    border-style: none;
+    margin: auto;
+}
+#otsikot{
+     
 }

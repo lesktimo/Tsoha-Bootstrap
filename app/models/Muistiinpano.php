@@ -46,14 +46,14 @@ class Muistiinpano extends BaseModel {
         return null;
     }
 
-    public function save(){
-    
-    $haku = DB::connection()->prepare('INSERT INTO Muistiinpano (nimi, prioriteetti, kategoria_id, kuvaus, lisatty) VALUES (:nimi, :prioriteetti, :kategoria_id, :kuvaus, :lisatty) RETURNING id');
-    $haku->execute(array('nimi' => $this->nimi, 'prioriteetti' => $this->prioriteetti, 'kategoria_id' => $this->kategoria_id, 'kuvaus' => $this->kuvaus, 'lisatty'=>$this->lisatty));
-    $row = $haku->fetch();
-    $this->id = $row['id'];
-  }
-    
+    public function save() {
+
+        $haku = DB::connection()->prepare('INSERT INTO Muistiinpano (nimi, prioriteetti, kategoria_id, kuvaus, lisatty) VALUES (:nimi, :prioriteetti, :kategoria_id, :kuvaus, :lisatty) RETURNING id');
+        $haku->execute(array('nimi' => $this->nimi, 'prioriteetti' => $this->prioriteetti, 'kategoria_id' => $this->kategoria_id, 'kuvaus' => $this->kuvaus, 'lisatty' => $this->lisatty));
+        $row = $haku->fetch();
+        $this->id = $row['id'];
+    }
+
     function getId() {
         return $this->id;
     }

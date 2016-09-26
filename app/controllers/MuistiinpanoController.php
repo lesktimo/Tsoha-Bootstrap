@@ -7,10 +7,9 @@ class MuistiinpanoController extends BaseController {
         View::make('muistiinpano/index.html', array('muistiinpanot' => $muistiinpanot));
     }
 
-    public static function show() {
-//        $muistiinpano = Muistiinpano::find($id);
-//        View::make($muistiinpano);
-        
+    public static function show($id) {
+        $muistiinpano = Muistiinpano::find($id);
+        View::make('muistiinpano/show.html', array('muistiinpano' => $muistiinpano));
     }
 
     public static function create() {
@@ -20,18 +19,18 @@ class MuistiinpanoController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-        $lisatty = date(YYYY - MM - DD);
-        $muistiinpano = new Game(array(
-            'name' => $params['name'],
+//        date_default_timezone_set('Europe/Finland');
+        $lisatty = date("Y-m-d");
+        $muistiinpano = new Muistiinpano(array(
+            'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
             'prioriteetti' => $params['prioriteetti'],
             'kategoria_id' => $params['kategoria_id'],
             'lisatty' => $lisatty
         ));
-
-        Kint::dump($params);
-
+                
         $muistiinpano->save();
+        
         Redirect::to('/muistiinpano/' . $muistiinpano->id, array('message' => 'Muistiinpano on lisätty listaasi!'));
     }
 

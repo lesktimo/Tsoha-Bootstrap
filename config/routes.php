@@ -21,15 +21,15 @@ $routes->get('/login', function() {
     HelloWorldController::login();
 });
 
-$routes->get('/muistiinpano', function() {
-    HelloWorldController::muistiinpano();
+$routes->post('/muistiinpano', function() {
+    MuistiinpanoController::store();
 });
 
-$routes->post('/muistiinpano/new', function() {
+$routes->get('/muistiinpano/new', function() {
     MuistiinpanoController::create();
 });
 
-//$routes->get('/muistiinpano/:id', function($id) {
-//    MuistiinpanoController::show($id);
-//});
+$routes->get('/muistiinpano/:id', function($id) {
+    MuistiinpanoController::show($id);
+});
 
