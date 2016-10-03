@@ -21,17 +21,22 @@ class MuistiinpanoController extends BaseController {
         $params = $_POST;
 //        date_default_timezone_set('Europe/Finland');
         $lisatty = date("Y-m-d");
-        $muistiinpano = new Muistiinpano(array(
+        $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
             'prioriteetti' => $params['prioriteetti'],
             'kategoria_id' => $params['kategoria_id'],
             'lisatty' => $lisatty
-        ));
-                
-        $muistiinpano->save();
-        
-        Redirect::to('/muistiinpano/' . $muistiinpano->id, array('message' => 'Muistiinpano on lisätty listaasi!'));
+        );
+        $muistiinpano = new Muistiinpano($attributes);
+        $errors = $muistiinpano->errors();
+        if (count($errors) == 0) {
+            $muistiinpano->save();
+            Redirect::to('/muistiinpano/' . $muistiinpano->id, array('message' => 'Muistiinpano on lisätty listaasi!'));
+        } else {
+            View::make('muistiinpano/new.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
+    
 }

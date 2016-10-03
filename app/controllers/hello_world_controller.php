@@ -8,25 +8,14 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $kayttaja = Kayttaja::find(1);
-        $kategoria = Kategoria::find(1);
-        $muistiinpano = Muistiinpano::find(1);
-        $muistilista = Muistilista::findKayttajalla(1);
-
-        $kayttajat = Kayttaja::all();
-        $kategoriat = Kategoria::all();
-        $muistiinpanot = Muistiinpano::all();
-        $muistilistat = Muistilista::all();
-
-        Kint::dump($kayttaja);
-        Kint::dump($kategoria);
-        Kint::dump($muistiinpano);
-        Kint::dump($muistilista);
-
-        Kint::dump($kayttajat);
-        Kint::dump($kategoriat);
-        Kint::dump($muistiinpanot);
-        Kint::dump($muistilistat);
+        $testimuistiinpano = new Muistiinpano(array(
+            'nimi' => 'aaa',
+            'prioriteetti' => '5',
+            'kuvaus' => 'd',
+            'lisatty' => 'd',
+        ));
+        $errors = $testimuistiinpano->errors();
+        kint::dump($errors);
     }
 
 //    public static function muistilista() {

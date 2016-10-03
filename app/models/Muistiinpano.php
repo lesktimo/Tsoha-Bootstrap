@@ -2,10 +2,11 @@
 
 class Muistiinpano extends BaseModel {
 
-    public $nimi, $id, $prioriteetti, $kategoria_id, $kuvaus, $lisatty, $tila;
+    public $nimi, $id, $prioriteetti, $kategoria_id, $kuvaus, $lisatty, $tila, $kategoria_nimi;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_nimi', 'validate_prioriteetti');
     }
 
     public static function all() {
@@ -41,6 +42,7 @@ class Muistiinpano extends BaseModel {
                 'lisatty' => $rivi['lisatty'],
                 'tila' => $rivi['tila']
             ));
+
             return $muistiinpano;
         }
         return null;
@@ -80,6 +82,28 @@ class Muistiinpano extends BaseModel {
 
     function getTila() {
         return $this->tila;
+    }
+
+    function haeKategorianNimi($id) {
+        
+    }
+
+    public function validate_nimi() {
+
+        $tuloste = 'Nimen';
+        $errors = array();
+        $errors = parent::validate_string_length($this->nimi, 2, $tuloste);
+
+        return $errors;
+    }
+
+    public function validate_prioriteetti() {
+
+        $tuloste = 'Prioriteetin';
+        $errors = array();
+        $errors = parent::validate_numeric_value($this->prioriteetti, $tuloste);
+
+        return $errors;
     }
 
 }

@@ -1,4 +1,4 @@
--- Lisää DROP TABLE lauseet tähän tiedostoon
+
 DROP TABLE IF EXISTS Kat_mp CASCADE;
 DROP TABLE IF EXISTS Kategoria CASCADE;
 DROP TABLE IF EXISTS Muistilista CASCADE;
