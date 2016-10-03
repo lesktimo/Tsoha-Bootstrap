@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Muokkaa muistiinpanoa</h1>
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<form method="post" action="{{base_path}}/muistiinpano">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
+    </div>
+
+    <div class="form-group">
+        <label>Prioriteetti</label>
+        <input type="text" name="prioriteetti" class="form-control" value="{{attributes.prioriteetti}}">
+    </div>
+
+    <div class="form-group">
+        <label>kategoria</label>
+        <input type="text" name="kategoria_id" class="form-control" value="{{attributes.kategoria_id}}">
+    </div>
+
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <textarea name="kuvaus" class="form-control" >{{attributes.kuvaus}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
+{% endblock %}

@@ -33,3 +33,13 @@ $routes->get('/muistiinpano/:id', function($id) {
     MuistiinpanoController::show($id);
 });
 
+$routes->get('/muistiinpano/:id/edit', function($id) {
+    MuistiinpanoController::edit($id);
+});
+$routes->post('/muistiinpano/:id/edit', function($id) {
+    MuistiinpanoController::update($id);
+});
+
+$routes->post('/muistiinpano/:id/destroy', function($id) {
+    MuistiinpanoController::destroy($id);
+});

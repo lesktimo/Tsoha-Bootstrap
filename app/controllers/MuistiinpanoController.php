@@ -38,5 +38,40 @@ class MuistiinpanoController extends BaseController {
         }
     }
 
-    
+    public static function edit($id) {
+        $muistiinpano = Muistiinpano::find($id);
+        View::make('muistiinpano/edit.html', array('attributes' => $muistiinpano));
+    }
+
+    public static function update($id) {
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+            'nimi' => $params['nimi'],
+            'kesken' => $params['kesken'],
+            'prioriteetti' => $params['prioriteetti'],
+            'kategoria_id' => $params['kategoria_id'],
+            'kuvaus' => $params['kuvaus']
+        );
+
+        $muistiinpano = new Muistiinpano($attributes);
+        $errors = $muistiinpano->errors();
+
+        if (count($errors) > 0) {
+            View::make('muistiinpano/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $muistiinpano->update();
+
+            Redirect::to('/muistiinpano/' . $muistiinpano->id, array('message' => 'Muistiinpanoa on muokattu onnistuneesti!'));
+        }
+    }
+
+    public static function destroy($id) {
+
+        $muistiinpano = new Muistiinpano(array('id' => $id));
+        $muistiinpano->destroy($id);
+        Redirect::to('/muistiinpano', array('message' => 'Muistiinpano on poistettu onnistuneesti!'));
+    }
+
 }

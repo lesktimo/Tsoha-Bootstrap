@@ -2,7 +2,7 @@
 
 class Muistiinpano extends BaseModel {
 
-    public $nimi, $id, $prioriteetti, $kategoria_id, $kuvaus, $lisatty, $tila, $kategoria_nimi;
+    public $nimi, $id, $prioriteetti, $kategoria_id, $kuvaus, $lisatty, $tila;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -56,6 +56,18 @@ class Muistiinpano extends BaseModel {
         $this->id = $row['id'];
     }
 
+    function update($id) {
+        $haku = DB::connection()->prepare('UPDATE muistiinpano SET nimi = :nimi, prioriteetti = :prioriteetti, kategoria_id = :kategoria_id, kuvaus = :kuvaus WHERE id = :id');
+        $haku->execute(array('nimi' => $this->nimi, 'prioriteetti' => $this->prioriteetti, 'kategoria_id' => $this->kategoria_id, 'kuvaus' => $this->kuvaus, 'lisatty' => $this->lisatty, 'id' => $id));
+               
+    }
+    
+    function destroy($id){
+        $haku = DB::connection()->prepare('DELETE FROM muistiinpano WHERE muistiinpano.id = :id');
+        $haku->execute(array('id' => $id));
+                 
+    }
+
     function getId() {
         return $this->id;
     }
@@ -82,10 +94,6 @@ class Muistiinpano extends BaseModel {
 
     function getTila() {
         return $this->tila;
-    }
-
-    function haeKategorianNimi($id) {
-        
     }
 
     public function validate_nimi() {
