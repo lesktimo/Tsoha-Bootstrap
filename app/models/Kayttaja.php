@@ -38,20 +38,20 @@ class Kayttaja extends BaseModel {
         return null;
     }
 
-    function getId() {
-        return $this->id;
-    }
-
-    function getKayttajatunnus() {
-        return $this->kayttajatunnus;
-    }
-
-    function getSalasana() {
-        return $this->salasana;
-    }
-
-    function setSalasana($salasana) {
-        $this->salasana = $salasana;
+    public function authenticate($kayttajatunnus, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
+        $query->execute(array('kayttajatunnus' => $kayttajatunnus, 'salasana' => $salasana));
+        $row = $query->fetch();
+        if ($row) {
+            $kayttaja = new Kayttaja(array(
+                'id' => $row['id'],
+                'kayttajatunnus' => $row['kayttajatunnus'],
+                'salasana' => $row['salasana']
+            ));
+            return $kayttaja;
+        } else {
+            return null;
+        }
     }
 
 }

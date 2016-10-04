@@ -1,19 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% import "macros/forms.html" as forms %}
 
 <h1>{{muistiinpano.nimi}}</h1>
-<!-- Painikkeet tähän -->
 <p>
-<form method="post" action="{{base_path}}/muistiinpano/{{muistiinpano.id}}/destroy" style="display: inline-block;">
-    <button type="submit" class="btn btn-danger">Poista</button>
-</form>
-<form method="post" action="{{base_path}}/muistiinpano/{{muistiinpano.id}}/edit" style="display: inline-block;">
-    <button type="submit" class="btn btn-default">Muokkaa</button>
-</form>
+    {{forms.destroy_button("#{base_path}/muistiinpano/#{muistiinpano.id}/destroy")}}
+    {{forms.edit_button}}
 </p>
 
-<ul >
+<ul>
     <li><strong>Prioriteetti:</strong> {{muistiinpano.prioriteetti}}<strong>/5</strong></li>
     <li><strong>Kategoria:</strong> {{muistiinpano.kategoria_id}}</li>
     <li><strong>Tila:</strong> {% if muistiinpano.tila %}

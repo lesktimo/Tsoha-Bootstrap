@@ -18,7 +18,12 @@ $routes->get('/mp_muokkaus', function() {
 });
 
 $routes->get('/login', function() {
-    HelloWorldController::login();
+    KayttajaController::login();
+});
+
+$routes->post('/login', function(){
+  // Kirjautumisen käsittely
+  KayttajaController::handle_login();
 });
 
 $routes->post('/muistiinpano', function() {

@@ -40,7 +40,12 @@ class MuistiinpanoController extends BaseController {
 
     public static function edit($id) {
         $muistiinpano = Muistiinpano::find($id);
-        View::make('muistiinpano/edit.html', array('attributes' => $muistiinpano));
+        $kategoriat = Kategoria::all();
+        $kat_mp = array();
+        foreach ($muistiinpano->kategoriat as $kategoria) {
+            $kat_mp[] = $kategoria->id;
+        }
+        View::make('muistiinpano/edit.html', array('muistiinpano' => $muistiinpano, 'kategoriat' => $kategoriat, 'kat_mp' => $kat_mp));
     }
 
     public static function update($id) {
