@@ -6,7 +6,7 @@ class Muistiinpano extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->tarkistukset = array('validate_nimi_min', 'validate_nimi_max', 'validate_prioriteetti');
+        $this->validators = array('validate_nimi_min', 'validate_nimi_max', 'validate_prioriteetti');
     }
 
     public static function all() {
@@ -68,8 +68,8 @@ class Muistiinpano extends BaseModel {
     }
 
     public function save() {
-        $haku = DB::connection()->prepare('INSERT INTO muistiinpano (kayttaja_id, nimi, prioriteetti, kuvaus, lisatty) VALUES (:kayttaja_id, :nimi, :prioriteetti, :kuvaus, CURDATE()) RETURNING id');
-        $haku->execute(array('kayttaja_id' => $_SESSION['user'], 'nimi' => $this->nimi, 'prioriteetti' => $this->prioriteetti, 'kuvaus' => $this->kuvaus));
+        $haku = DB::connection()->prepare('INSERT INTO muistiinpano (kayttaja_id, nimi, prioriteetti, kuvaus, lisatty) VALUES (:kayttaja_id, :nimi, :prioriteetti, :kuvaus, :lisatty) RETURNING id');
+        $haku->execute(array('kayttaja_id' => $_SESSION['user'], 'nimi' => $this->nimi, 'prioriteetti' => $this->prioriteetti, 'kuvaus' => $this->kuvaus, 'lisatty' => $this->lisatty));
         $rivi = $haku->fetch();
         $this->id = $rivi['id'];
         foreach ($this->kategoriat as $kategoria) {
@@ -109,7 +109,7 @@ class Muistiinpano extends BaseModel {
     }
 
     public function validate_nimi_max() {
-        $errors = parent::validate_string_length_min($this->nimi, 75, 'Nimen');
+        $errors = parent::validate_string_length_max($this->nimi, 75, 'Nimen');
         return $errors;
     }
 

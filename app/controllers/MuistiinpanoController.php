@@ -13,21 +13,24 @@ class MuistiinpanoController extends BaseController {
     }
 
     public static function create() {
-
-        View::make('muistiinpano/new.html');
+        $kategoriat = Kategoria::all();
+        View::make('muistiinpano/new.html', array('kategoriat' => $kategoriat));
     }
 
     public static function store() {
         $params = $_POST;
-//        date_default_timezone_set('Europe/Finland');
+        $kategoriat = $params['kategoriat'];
         $lisatty = date("Y-m-d");
         $attributes = array(
             'nimi' => $params['nimi'],
             'kuvaus' => $params['kuvaus'],
             'prioriteetti' => $params['prioriteetti'],
-            'kategoria_id' => $params['kategoria_id'],
-            'lisatty' => $lisatty
+            'lisatty' => $lisatty,
+            'kategoriat' => array()
         );
+        foreach ($kategoriat as $kategoria) {
+            $attributes['kategoriat'][] = $kategoria;
+        }
         $muistiinpano = new Muistiinpano($attributes);
         $errors = $muistiinpano->errors();
         if (count($errors) == 0) {

@@ -5,12 +5,18 @@
 <h1>{{muistiinpano.nimi}}</h1>
 <p>
     {{forms.destroy_button("#{base_path}/muistiinpano/#{muistiinpano.id}/destroy")}}
-    {{forms.edit_button}}
+    <a href="{{base_path}}/muistiinpano/{{muistiinpano.id}}/edit" class="btn btn-default">Muokkaa</a>
 </p>
 
 <ul>
     <li><strong>Prioriteetti:</strong> {{muistiinpano.prioriteetti}}<strong>/5</strong></li>
-    <li><strong>Kategoria:</strong> {{muistiinpano.kategoria_id}}</li>
+    <li><strong>Kategoriat:</strong> 
+        {% if muistiinpano.kategoriat|length > 0 %}
+        {% for kategoria in muistiinpano.kategoriat %}
+        <p>{{kategoria.nimi}}</p>
+        {% endfor %}
+        {% endif %}
+    </li>
     <li><strong>Tila:</strong> {% if muistiinpano.tila %}
         <label class="label label-success">Valmis</label>
         {% else %}

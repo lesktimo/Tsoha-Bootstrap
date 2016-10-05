@@ -22,8 +22,18 @@
     </div>
 
     <div class="form-group">
-        <label>kategoria</label>
-        <input type="text" name="kategoria_id" class="form-control" value="{{attributes.kategoria_id}}">
+        <label class="control-label">Kategoriat</label>
+        <br>
+        {% for kategoria in kategoriat %}
+        {% if kategoria.id in kat_mp %}
+        <input type="checkbox" checked="checked" name="kategoriat[]" value="{{kategoria.id}}">{{kategoria.nimi}}</input>
+        <br>
+        {% else %}
+        <input type="checkbox" name="kategoriat[]" value="{{kategoria.id}}">{{kategoria.nimi}}</input>
+        <br>
+        {% endif %}
+        {% endfor %}
+        <input type="hidden" name="kategoriat[]" value="">
     </div>
 
     <div class="form-group">
