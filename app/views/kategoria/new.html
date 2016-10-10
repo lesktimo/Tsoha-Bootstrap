@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+
+  <h1>Lisää Kategoria</h1>
+
+  {{forms.show_errors(errors)}}
+
+  <form method="post" action="{{base_path}}/kategoria">
+    <div class="form-group">
+	  <label class="control-label">Nimi</label>
+	  <input name="nimi" class="form-control" type="text" value="{{attributes.nimi}}">
+    </div>
+    <br>
+    <div class="form-group">
+	  <button type="submit" class="btn btn-success">Tallenna</button>
+    </div>
+  </form>
+
+{% endblock %}

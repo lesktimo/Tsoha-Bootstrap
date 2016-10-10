@@ -52,6 +52,28 @@ $routes->post('/muistiinpano/:id/destroy', 'check_logged_in', function($id) {
     MuistiinpanoController::destroy($id);
 });
 
-$routes->post('/logout', function(){
-  KayttajaController::logout();
+$routes->post('/logout', function() {
+    KayttajaController::logout();
+});
+
+$routes->get('/kategoria', 'check_logged_in', function() {
+    KategoriaController::index();
+});
+$routes->get('/kategoria/new', 'check_logged_in', function() {
+    KategoriaController::create();
+});
+$routes->get('/kategoria/:id', 'check_logged_in', function($id) {
+    KategoriaController::show($id);
+});
+$routes->post('/kategoria', 'check_logged_in', function() {
+    KategoriaController::store();
+});
+$routes->get('/kategoria/:id/edit', 'check_logged_in', function($id) {
+    KategoriaController::edit($id);
+});
+$routes->post('/kategoria/:id/edit', 'check_logged_in', function($id) {
+    KategoriaController::update($id);
+});
+$routes->post('/kategoria/:id/destroy', 'check_logged_in', function($id) {
+    KategoriaController::destroy($id);
 });
