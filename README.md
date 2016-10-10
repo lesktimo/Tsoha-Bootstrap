@@ -2,9 +2,9 @@
 
 Linkit:
 
-* [Linkki dokumentaatiooni: ](https://github.com/lesktimo/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Linkki dokumentaatiooni](https://github.com/lesktimo/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
-* [Etusivu: ](http://lesktimo.users.cs.helsinki.fi/tsoha)
+* [Etusivu](http://lesktimo.users.cs.helsinki.fi/tsoha)
 
 
 ## Työn aihe
