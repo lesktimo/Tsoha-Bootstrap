@@ -13,16 +13,16 @@
 <form method="post" action="{{base_path}}/muistiinpano">
     <div class="form-group">
         <label>Nimi</label>
-        <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
+        <input type="text" name="nimi" class="form-control" value="{{muistiinpano.nimi}}">
     </div>
 
     <div class="form-group">
         <label>Prioriteetti</label>
-        <input type="text" name="prioriteetti" class="form-control" value="{{attributes.prioriteetti}}">
+        <input type="text" name="prioriteetti" class="form-control" value="{{muistiinpano.prioriteetti}}">
     </div>
 
     <div class="form-group">
-        <label class="control-label">Kategoria</label>
+        <label class="control-label">Kategoriat</label>
         <br>
         {% for kategoria in kategoriat %}
         {% if kategoria.id in kat_mp %}
@@ -38,7 +38,7 @@
 
     <div class="form-group">
         <label>Kuvaus</label>
-        <textarea name="kuvaus" class="form-control" >{{attributes.kuvaus}}</textarea>
+        <textarea name="kuvaus" class="form-control" >{{muistiinpano.kuvaus}}</textarea>
     </div>
 
     <div class="form-group">

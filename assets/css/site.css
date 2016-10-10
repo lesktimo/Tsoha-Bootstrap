@@ -6,7 +6,6 @@
     font-size:x-large;
     font-family: Lobster;
     text-align: center;
-
 }
 
 .navbar .container-fluid{
@@ -42,20 +41,14 @@ body {
 .page-header{
     border-bottom: hidden;
     margin: -3px;
-
-
-
 }
 
 #log{
     width:200px;
-
 }
 
 .btn-primary{
     max-width: 295px;
-
-
 }
 
 #poyta{
@@ -63,5 +56,5 @@ body {
     margin: auto;
 }
 #otsikot{
-     
+
 }

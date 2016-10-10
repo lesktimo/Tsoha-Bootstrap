@@ -10,7 +10,7 @@ class Muistiinpano extends BaseModel {
     }
 
     public static function all() {
-        $haku = DB::connection()->prepare('SELECT * FROM muistiinpano WHERE kayttaja_id = :kayttaja_id');
+        $haku = DB::connection()->prepare('SELECT * FROM muistiinpano WHERE kayttaja_id = :kayttaja_id ORDER BY muistiinpano.prioriteetti DESC');
         $haku->execute(array('kayttaja_id' => $_SESSION['user']));
         $rivit = $haku->fetchAll();
         $muistiinpanot = array();
@@ -61,7 +61,7 @@ class Muistiinpano extends BaseModel {
                 'prioriteetti' => $rivi['prioriteetti'],
                 'kuvaus' => $rivi['kuvaus'],
                 'lisatty' => $rivi['lisatty'],
-                'luokat' => $kategoriat
+                'kategoriat' => $kategoriat
             ));
         }
         return $muistiinpano;
@@ -73,9 +73,11 @@ class Muistiinpano extends BaseModel {
         $rivi = $haku->fetch();
         $this->id = $rivi['id'];
         foreach ($this->kategoriat as $kategoria) {
-            $kategorianhaku = DB::connection()->prepare('INSERT INTO kat_mp (kategoria_id, mp_id) VALUES (:kategoria_id, :mp_id)');
-            $kategorianhaku->execute(array('kategoria_id' => $kategoria, 'mp_id' => $this->id));
-            $rivi = $haku->fetch();
+//            if (is_int($kategoria)) {
+                $kategorianhaku = DB::connection()->prepare('INSERT INTO kat_mp (kategoria_id, mp_id) VALUES (:kategoria_id, :mp_id)');
+                $kategorianhaku->execute(array('kategoria_id' => $kategoria, 'mp_id' => $this->id));
+                $rivi = $haku->fetch();
+//            }
         }
     }
 
@@ -95,8 +97,8 @@ class Muistiinpano extends BaseModel {
     }
 
     public function destroy() {
-        $kategorianhaku = DB::connection()->prepare('DELETE FROM kat_mp WHERE muistiinpano_id = :muistiinpano_id');
-        $kategorianhaku->execute(array('muistiinpano_id' => $this->id));
+        $kategorianhaku = DB::connection()->prepare('DELETE FROM kat_mp WHERE mp_id = :id');
+        $kategorianhaku->execute(array('id' => $this->id));
         $rivi = $kategorianhaku->fetch();
         $haku = DB::connection()->prepare('DELETE FROM muistiinpano WHERE id = :id');
         $haku->execute(array('id' => $this->id));
