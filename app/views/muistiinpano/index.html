@@ -7,7 +7,7 @@
     <a href="{{base_path}}/muistiinpano/new" class="btn btn-success">Lisää muistiinpano</a>
 </p>
 
-<table class="table-responsive" id="poyta">
+<table class="table-bordered" id="poyta">
     <thead>
         <tr id="otsikot">
             <th>Muistiinpano</th>
@@ -24,7 +24,11 @@
         <tr>
             <td><a href="{{base_path}}/muistiinpano/{{muistiinpano.id}}">{{muistiinpano.nimi}}</td>
             <td>{{muistiinpano.prioriteetti}}<strong>/5</strong></td>
-            <td>{{muistiinpano.kategoria_id}}</td>
+            <td> {% if muistiinpano.kategoriat|length > 0 %}
+                {% for kategoria in muistiinpano.kategoriat %}
+                <p>{{kategoria.nimi}}</p>
+                {% endfor %}
+                {% endif %}</td>
             <td>
                 {% if muistiinpano.tila %}
                 <label class="label label-success">Valmis</label>
