@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+
+  {{forms.show_message(message)}}
+
+  <h1>{{kategoria.nimi}}</h1>
+  
+  <p>
+    {{forms.edit_button("#{base_path}/kategoria/#{kategoria.id}/edit")}}
+    {{forms.destroy_button("#{base_path}/kategoria/#{kategoria.id}/destroy")}}
+  </p>
+
+{% endblock %}

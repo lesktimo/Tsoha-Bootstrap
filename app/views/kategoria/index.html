@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+
+{{forms.show_message(message)}}
+
+<h1>Kategoriat</h1>
+
+<p><a class="btn btn-success" href="{{base_path}}/kategoria/new" role="button">Lisää uusi kategoria</a></p>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Nimi</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for kategoria in kategoriat %}
+        <tr>
+            <td><a href="{{base_path}}/kategoria/{{kategoria.id}}">{{kategoria.nimi}}</a></td>
+            <td>{{forms.edit_button("#{base_path}/kategoria/#{kategoria.id}/edit")}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
