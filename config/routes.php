@@ -29,6 +29,10 @@ $routes->post('/login', function() {
     KayttajaController::handle_login();
 });
 
+$routes->post('/muistiinpano/:id/edit', 'check_logged_in', function() {
+    MuistiinpanoController::update();
+});
+
 $routes->post('/muistiinpano', 'check_logged_in', function() {
     MuistiinpanoController::store();
 });
@@ -43,9 +47,6 @@ $routes->get('/muistiinpano/:id', 'check_logged_in', function($id) {
 
 $routes->get('/muistiinpano/:id/edit', 'check_logged_in', function($id) {
     MuistiinpanoController::edit($id);
-});
-$routes->post('/muistiinpano/:id/edit', 'check_logged_in', function($id) {
-    MuistiinpanoController::update($id);
 });
 
 $routes->post('/muistiinpano/:id/destroy', 'check_logged_in', function($id) {

@@ -28,13 +28,10 @@ class MuistiinpanoController extends BaseController {
             'lisatty' => $lisatty,
             'kategoriat' => array()
         );
-        kint::dump($attributes);
         foreach ($kategoriat as $kategoria) {
             $attributes['kategoriat'][] = $kategoria;
         }
-        kint::dump($attributes);
         $attributes['kategoriat'] = array_filter($attributes['kategoriat']);
-        kint::dump($attributes);
         $muistiinpano = new Muistiinpano($attributes);
         $errors = $muistiinpano->errors();
         if (count($errors) == 0) {
@@ -49,40 +46,40 @@ class MuistiinpanoController extends BaseController {
         $muistiinpano = Muistiinpano::find($id);
         $kategoriat = Kategoria::all();
         $kat_mp = array();
-        kint::dump($muistiinpano);
         foreach ($muistiinpano->kategoriat as $kategoria) {
             $kat_mp[] = $kategoria->id;
         }
-        kint::dump($kat_mp);
         View::make('muistiinpano/edit.html', array('muistiinpano' => $muistiinpano, 'kategoriat' => $kategoriat, 'kat_mp' => $kat_mp));
     }
 
-    public static function update($id) {
+    public static function update() {
         $params = $_POST;
-
+        Kint::dump($params['id']);
+        $kat_mp = $params['kategoriat'];
+        $kategoriat = Kategoria::all();
         $attributes = array(
-            'id' => $id,
+            'id' => $params['id'],
             'nimi' => $params['nimi'],
-            'kesken' => $params['kesken'],
             'prioriteetti' => $params['prioriteetti'],
-            'kategoria_id' => $params['kategoria_id'],
-            'kuvaus' => $params['kuvaus']
+            'kuvaus' => $params['kuvaus'],
+            'kategoriat' => array()
         );
-
+        foreach ($kat_mp as $kategoria) {
+            $attributes['kategoriat'][] = $kategoria;
+        }
+        $attributes['kategoriat'] = array_filter($attributes['kategoriat']);
         $muistiinpano = new Muistiinpano($attributes);
         $errors = $muistiinpano->errors();
 
-        if (count($errors) > 0) {
-            View::make('muistiinpano/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-        } else {
+        if (count($errors) == 0) {
             $muistiinpano->update();
-
-            Redirect::to('/muistipano/' . $muistiinpano->id, array('message' => 'Muistiinpanoa on muokattu onnistuneesti!'));
+            Redirect::to('/muistiinpano/' . $muistiinpano->id, array('message' => 'Muistiinpanoa on muokattu onnistuneesti!'));
+        } else {
+            View::make('muistiinpano/edit.html', array('errors' => $errors, 'muistiinpano' => $muistiinpano, 'kategoriat' => $kategoriat, 'kat_mp' => $kat_mp));
         }
     }
 
     public static function destroy($id) {
-
         $muistiinpano = new Muistiinpano(array('id' => $id));
         $muistiinpano->destroy();
         Redirect::to('/muistilista', array('message' => 'Muistiinpano on poistettu onnistuneesti!'));

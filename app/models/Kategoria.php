@@ -10,7 +10,7 @@ class Kategoria extends BaseModel {
     }
 
     public static function all() {
-        $haku = DB::connection()->prepare('SELECT * FROM Kategoria WHERE kayttaja_id = :kayttaja_id');
+        $haku = DB::connection()->prepare('SELECT * FROM Kategoria WHERE kayttaja_id = :kayttaja_id ORDER BY nimi ASC');
         $haku->execute(array('kayttaja_id' => $_SESSION['user']));
         $rivit = $haku->fetchAll();
         $kategoriat = array();

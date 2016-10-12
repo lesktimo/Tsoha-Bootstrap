@@ -16,7 +16,6 @@
             <th>Muistiinpano</th>
             <th>Prioriteetti</th>
             <th>Kategoria</th>
-            <th>Tila</th>
             <th>Lisäyspäivä</th>
             <th></th>
         </tr>
@@ -32,13 +31,6 @@
                 <p>{{kategoria.nimi}}</p>
                 {% endfor %}
                 {% endif %}</td>
-            <td>
-                {% if muistiinpano.tila %}
-                <label class="label label-success">Valmis</label>
-                {% else %}
-                <label class="label label-danger">Kesken</label>
-                {% endif %}
-            </td>
             <td>{{muistiinpano.lisatty}}</td>
             <th><a href="{{base_path}}/muistiinpano/{{muistiinpano.id}}/edit" class="btn btn-default">Muokkaa</a></th>
         </tr>

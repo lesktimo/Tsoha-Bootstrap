@@ -16,7 +16,7 @@ class Muistiinpano extends BaseModel {
         $muistiinpanot = array();
         foreach ($rivit as $rivi) {
             $kategoriat = array();
-            $kategorianhaku = DB::connection()->prepare('SELECT kategoria.id, kategoria.nimi FROM muistiinpano, kategoria, kat_mp WHERE kat_mp.mp_id = muistiinpano.id AND kat_mp.kategoria_id = kategoria.id AND muistiinpano.id = :id');
+            $kategorianhaku = DB::connection()->prepare('SELECT kategoria.id, kategoria.nimi FROM muistiinpano, kategoria, kat_mp WHERE kat_mp.mp_id = muistiinpano.id AND kat_mp.kategoria_id = kategoria.id AND muistiinpano.id = :id ORDER BY kategoria.nimi ASC');
             $kategorianhaku->execute(array('id' => $rivi['id']));
             $toisetRivit = $kategorianhaku->fetchAll();
             foreach ($toisetRivit as $toinenRivi) {
@@ -74,9 +74,9 @@ class Muistiinpano extends BaseModel {
         $this->id = $rivi['id'];
         foreach ($this->kategoriat as $kategoria) {
 //            if (is_int($kategoria)) {
-                $kategorianhaku = DB::connection()->prepare('INSERT INTO kat_mp (kategoria_id, mp_id) VALUES (:kategoria_id, :mp_id)');
-                $kategorianhaku->execute(array('kategoria_id' => $kategoria, 'mp_id' => $this->id));
-                $rivi = $haku->fetch();
+            $kategorianhaku = DB::connection()->prepare('INSERT INTO kat_mp (kategoria_id, mp_id) VALUES (:kategoria_id, :mp_id)');
+            $kategorianhaku->execute(array('kategoria_id' => $kategoria, 'mp_id' => $this->id));
+            $rivi = $haku->fetch();
 //            }
         }
     }
@@ -85,12 +85,12 @@ class Muistiinpano extends BaseModel {
         $haku = DB::connection()->prepare('UPDATE muistiinpano SET (nimi, prioriteetti, kuvaus) = (:nimi, :prioriteetti, :kuvaus) WHERE id = :id');
         $haku->execute(array('id' => $this->id, 'nimi' => $this->nimi, 'kuvaus' => $this->kuvaus, 'prioriteetti' => $this->prioriteetti));
         $rivi = $haku->fetch();
-        $poistaKategoriat = DB::connection()->prepare('DELETE FROM kat_mp WHERE muistiinpano_id = :muistiinpano_id');
+        $poistaKategoriat = DB::connection()->prepare('DELETE FROM kat_mp WHERE mp_id = :muistiinpano_id');
         $poistaKategoriat->execute(array('muistiinpano_id' => $this->id));
         $rivi = $haku->fetch();
         $kategoriat = $this->kategoriat;
         foreach ($kategoriat as $kategoria) {
-            $kategorianhaku = DB::connection()->prepare('INSERT INTO kat_mp (kategoria_id, muistiinpano_id) VALUES (:kategoria_id, :muistiinpano_id)');
+            $kategorianhaku = DB::connection()->prepare('INSERT INTO kat_mp (kategoria_id, mp_id) VALUES (:kategoria_id, :muistiinpano_id)');
             $kategorianhaku->execute(array('kategoria_id' => $kategoria, 'muistiinpano_id' => $this->id));
             $rivi = $haku->fetch();
         }
