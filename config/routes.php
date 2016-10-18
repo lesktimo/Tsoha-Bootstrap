@@ -4,7 +4,7 @@ function check_logged_in() {
     BaseController::check_logged_in();
 }
 
-$routes->get('/', 'check_logged_in', function() {
+$routes->get('/', function() {
     HelloWorldController::index();
 });
 
@@ -27,6 +27,14 @@ $routes->get('/login', function() {
 
 $routes->post('/login', function() {
     KayttajaController::handle_login();
+});
+
+$routes->get('/register', function() {
+    KayttajaController::register();
+});
+
+$routes->post('/register', function() {
+    KayttajaController::handle_register();
 });
 
 $routes->post('/muistiinpano/:id/edit', 'check_logged_in', function() {

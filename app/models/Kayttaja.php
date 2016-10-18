@@ -6,6 +6,7 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_nimi');
     }
 
     public static function all() {
@@ -39,19 +40,37 @@ class Kayttaja extends BaseModel {
     }
 
     public function authenticate($kayttajatunnus, $salasana) {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
-        $query->execute(array('kayttajatunnus' => $kayttajatunnus, 'salasana' => $salasana));
-        $row = $query->fetch();
-        if ($row) {
+        $haku = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
+        $haku->execute(array('kayttajatunnus' => $kayttajatunnus, 'salasana' => $salasana));
+        $rivi = $haku->fetch();
+        if ($rivi) {
             $kayttaja = new Kayttaja(array(
-                'id' => $row['id'],
-                'kayttajatunnus' => $row['kayttajatunnus'],
-                'salasana' => $row['salasana']
+                'id' => $rivi['id'],
+                'kayttajatunnus' => $rivi['kayttajatunnus'],
+                'salasana' => $rivi['salasana']
             ));
             return $kayttaja;
         } else {
             return null;
         }
+    }
+
+    public function save() {
+        $haku = DB::connection()->prepare('INSERT INTO Kayttaja (kayttajatunnus, salasana) VALUES (:kayttajatunnus, :salasana) returning id');
+        $haku->execute(array('kayttajatunnus' => $this->kayttajatunnus, 'salasana' => $this->salasana));
+        $rivi = $haku->fetch();
+        $this->id = $rivi['id'];
+    }
+
+    public function validate_nimi() {
+        $errors = array();
+        $haku = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus LIMIT 1');
+        $haku->execute(array('kayttajatunnus' => $this->kayttajatunnus));
+        $rivi = $haku->fetch();
+        if ($rivi) {
+            $errors[] = 'Käyttäjätunnus on jo olemassa!';
+        }
+        return $errors;
     }
 
 }

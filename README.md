@@ -1,8 +1,8 @@
-# Tietokantasovelluksen esittelysivu
+# Muistilistan esittelysivu
 
 Linkit:
 
-* [Linkki dokumentaatiooni](https://github.com/lesktimo/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Linkki dokumentaatiooni](https://github.com/lesktimo/Muistilista/blob/master/doc/dokumentaatio.pdf)
 
 * [Etusivu](http://lesktimo.users.cs.helsinki.fi/tsoha)
 

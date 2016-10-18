@@ -25,4 +25,28 @@ class KayttajaController extends BaseController {
         Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
     }
 
+    public static function register() {
+        View::make('kayttaja/register.html');
+    }
+
+    public static function handle_register() {
+        $params = $_POST;
+        $attributes = array(
+            'kayttajatunnus' => $params['kayttajatunnus'],
+            'salasana' => $params['salasana']
+        );
+        if (!$attributes['kayttajatunnus'] || !$attributes['salasana']) {
+            View::make('kayttaja/register.html', array('error' => 'Tyhjä käyttäjätunnus tai salasana!'));
+        } else {
+            $kayttaja = new Kayttaja($attributes);
+            $errors = $kayttaja->errors();
+            if (count($errors) == 0) {
+                $kayttaja->save();
+                Redirect::to('/login', array('message' => 'Käyttäjä lisätty onnistuneesti!'));
+            } else {
+                View::make('kayttaja/register.html', array('errors' => $errors));
+            }
+        }
+    }
+
 }
